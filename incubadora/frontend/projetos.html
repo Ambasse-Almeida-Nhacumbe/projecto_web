@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Projetos | ISPT-CICIE</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-list-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+        }
+        .project-list-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--primary-color);
+        }
+        .search-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .search-bar input {
+            flex: 1;
+            font-size: 1.2rem;
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: 1.5px solid #bbb;
+        }
+        .search-bar button {
+            background: #fff;
+            border: 1.5px solid #bbb;
+            border-radius: 6px;
+            padding: 0 18px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: background 0.2s;
+        }
+        .search-bar button:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .project-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .project-thumb {
+            width: 120px;
+            height: 120px;
+            background: #f2f2f2;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #bbb;
+        }
+        .project-info {
+            flex: 1;
+        }
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        .project-desc {
+            color: #444;
+            font-size: 1.05rem;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .pagination-btn {
+            border: 1.5px solid var(--primary-color);
+            background: #fff;
+            color: var(--primary-color);
+            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s;
+        }
+        .pagination-btn.active, .pagination-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h3 class="text-white m-0">ISPT</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="projetos.html">Projectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mentoria">Agendar Mentoria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#noticias">Notícias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="project-list-container">
+        <div class="project-list-title">LISTA DE PROJETOS</div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar projetos">
+            <button id="filterBtn" title="Filtrar"><i class="fas fa-filter"></i></button>
+        </div>
+        <div id="projectList">
+            <!-- Project items will be injected here -->
+        </div>
+        <div class="pagination">
+            <button class="pagination-btn" id="prevPage"><i class="fas fa-chevron-left"></i></button>
+            <span class="pagination-btn active" id="currentPage">1</span>
+            <button class="pagination-btn" id="nextPage"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Example data
+        const projects = [
+            { title: 'Título do Projeto 1', desc: 'Descrição breve do projeto 1' },
+            { title: 'Título do Projeto 2', desc: 'Descrição breve do projeto 2' },
+            { title: 'Título do Projeto 3', desc: 'Descrição breve do projeto 3' },
+            { title: 'Título do Projeto 4', desc: 'Descrição breve do projeto 4' },
+            { title: 'Título do Projeto 5', desc: 'Descrição breve do projeto 5' },
+            { title: 'Título do Projeto 6', desc: 'Descrição breve do projeto 6' },
+        ];
+        const perPage = 3;
+        let currentPage = 1;
+        let filteredProjects = projects;
+
+        function renderProjects() {
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const list = filteredProjects.slice(start, end);
+            const projectList = document.getElementById('projectList');
+            projectList.innerHTML = list.map((p, i) => `
+                <div class="project-item">
+                    <div class="project-thumb"><i class="fas fa-image"></i></div>
+                    <div class="project-info">
+                        <div class="project-title"><a href="detalhe-projeto.html" style="color: var(--primary-color); text-decoration: none;">${p.title}</a></div>
+                        <hr>
+                        <div class="project-desc">${p.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('currentPage').textContent = currentPage;
+        }
+
+        function updatePagination() {
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage >= Math.ceil(filteredProjects.length / perPage);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            filteredProjects = projects.filter(p => p.title.toLowerCase().includes(val) || p.desc.toLowerCase().includes(val));
+            currentPage = 1;
+            renderProjects();
+            updatePagination();
+        });
+        document.getElementById('prevPage').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProjects();
+                updatePagination();
+            }
+        });
+        document.getElementById('nextPage').addEventListener('click', function() {
+            if (currentPage < Math.ceil(filteredProjects.length / perPage)) {
+                currentPage++;
+                renderProjects();
+                updatePagination();
+            }
+        });
+        // Initial render
+        renderProjects();
+        updatePagination();
+    </script>
+</body>
+</html> 

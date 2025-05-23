@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorias Disponíveis | ISPT-CICIE</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .mentorias-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+        }
+        .mentorias-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .table thead th {
+            color: var(--primary-color);
+            font-weight: 600;
+            background: #f8f9fa;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h3 class="text-white m-0">ISPT</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projetos.html">Projectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mentoria.html">Agendar Mentoria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="lista-mentorias.html">Mentorias Disponíveis</a>
+                    </li>
+                    <li class="nav-item d-none">
+                        <a class="nav-link" href="#noticias">Notícias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mentorias-container">
+        <div class="mentorias-title">Mentorias Disponíveis</div>
+        <div class="table-responsive mb-5">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Mentor</th>
+                        <th>Área</th>
+                        <th>Data Disponível</th>
+                        <th>Agendar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prof. Ana Silva</td>
+                        <td>Plano de Negócios</td>
+                        <td>2024-06-20</td>
+                        <td><a href="mentoria.html" class="btn btn-primary btn-sm">Agendar</a></td>
+                    </tr>
+                    <tr>
+                        <td>Empresário João Souza</td>
+                        <td>Captação de Recursos</td>
+                        <td>2024-06-22</td>
+                        <td><a href="mentoria.html" class="btn btn-primary btn-sm">Agendar</a></td>
+                    </tr>
+                    <tr>
+                        <td>Prof. Maria Oliveira</td>
+                        <td>Pitch e Apresentação</td>
+                        <td>2024-06-25</td>
+                        <td><a href="mentoria.html" class="btn btn-primary btn-sm">Agendar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mentorias-title">Mentorias Agendadas</div>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Tipo de Mentoria</th>
+                        <th>Data</th>
+                        <th>Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>João Silva</td>
+                        <td>joao@email.com</td>
+                        <td>Professor</td>
+                        <td>2024-06-10</td>
+                        <td>Mentoria sobre plano de negócios.</td>
+                    </tr>
+                    <tr>
+                        <td>Maria Oliveira</td>
+                        <td>maria@email.com</td>
+                        <td>Empresário</td>
+                        <td>2024-06-12</td>
+                        <td>Discussão sobre captação de recursos.</td>
+                    </tr>
+                    <tr>
+                        <td>Carlos Souza</td>
+                        <td>carlos@email.com</td>
+                        <td>Professor</td>
+                        <td>2024-06-15</td>
+                        <td>Revisão de pitch e apresentação.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html> 

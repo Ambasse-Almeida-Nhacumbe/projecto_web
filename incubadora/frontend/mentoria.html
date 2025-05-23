@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Mentoria | ISPT-CICIE</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .mentoria-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+        }
+        .mentoria-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .btn-agendar {
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50px;
+            padding: 10px 32px;
+            border: none;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+        .btn-agendar:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h3 class="text-white m-0">ISPT</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projetos.html">Projectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="mentoria.html">Agendar Mentoria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="lista-mentorias.html">Lista de Mentorias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mentoria-container">
+        <div class="mentoria-title">Agendar Mentoria</div>
+        <form>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Seu email" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo de Mentoria</label>
+                <select class="form-control" id="tipo" required>
+                    <option value="">Selecione</option>
+                    <option value="professor">Professor</option>
+                    <option value="empresario">Empresário</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="data" class="form-label">Data</label>
+                <input type="date" class="form-control" id="data" required>
+            </div>
+            <div class="mb-3">
+                <label for="mensagem" class="form-label">Mensagem</label>
+                <textarea class="form-control" id="mensagem" rows="4" placeholder="Descreva o objetivo da mentoria" required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-agendar">Agendar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias | ISPT-CICIE</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .noticias-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+        }
+        .noticias-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .news-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 24px 20px;
+            margin-bottom: 28px;
+        }
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        .news-date {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .news-summary {
+            color: #444;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+        }
+        .btn-lermais {
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50px;
+            padding: 6px 22px;
+            border: none;
+            font-weight: 500;
+            font-size: 0.98rem;
+            transition: background 0.2s;
+        }
+        .btn-lermais:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h3 class="text-white m-0">ISPT</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projetos.html">Projectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mentoria.html">Agendar Mentoria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submissao.html">Submeter Relatório/Pitch</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="noticias.html">Notícias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="noticias-container">
+        <div class="noticias-title">Notícias e Editais</div>
+        <div class="news-card">
+            <div class="news-title">Edital de Seleção de Novos Projetos 2024</div>
+            <div class="news-date"><i class="far fa-calendar-alt"></i> 10/06/2024</div>
+            <div class="news-summary">Estão abertas as inscrições para o edital de seleção de novos projetos inovadores para a incubadora ISPT-CICIE. Confira os requisitos e prazos.</div>
+            <a href="noticia1.html" class="btn btn-lermais">Ler mais</a>
+        </div>
+        <div class="news-card">
+            <div class="news-title">Evento: Semana da Inovação ISPT</div>
+            <div class="news-date"><i class="far fa-calendar-alt"></i> 05/06/2024</div>
+            <div class="news-summary">Participe da Semana da Inovação com palestras, workshops e apresentação de projetos incubados. Inscreva-se gratuitamente!</div>
+            <a href="noticia2.html" class="btn btn-lermais">Ler mais</a>
+        </div>
+        <div class="news-card">
+            <div class="news-title">Resultado do Pitch Day 2024</div>
+            <div class="news-date"><i class="far fa-calendar-alt"></i> 28/05/2024</div>
+            <div class="news-summary">Confira os projetos vencedores do Pitch Day e os destaques do evento realizado no ISPT-CICIE.</div>
+            <a href="noticia3.html" class="btn btn-lermais">Ler mais</a>
+        </div>
+        <div class="news-card">
+            <div class="news-title">ISPT-CICIE recebe prêmio nacional de inovação</div>
+            <div class="news-date"><i class="far fa-calendar-alt"></i> 15/05/2024</div>
+            <div class="news-summary">A incubadora ISPT-CICIE foi reconhecida nacionalmente pelo seu impacto no ecossistema de inovação e empreendedorismo estudantil.</div>
+            <a href="noticia4.html" class="btn btn-lermais">Ler mais</a>
+        </div>
+        <div class="news-card">
+            <div class="news-title">Novo laboratório de prototipagem inaugurado</div>
+            <div class="news-date"><i class="far fa-calendar-alt"></i> 01/05/2024</div>
+            <div class="news-summary">O ISPT-CICIE inaugurou um moderno laboratório de prototipagem para apoiar o desenvolvimento de projetos incubados.</div>
+            <a href="noticia5.html" class="btn btn-lermais">Ler mais</a>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html> 

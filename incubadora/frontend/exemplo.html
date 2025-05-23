@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISPT Incubadora de Inovação | Exemplo</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f7fafd;
+        }
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 48px 0 32px 0;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .incubadora-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .incubadora-img {
+            width: 340px;
+            height: 220px;
+            background: linear-gradient(135deg, #e3f0fc 60%, #f7fafd 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #b0c4d8;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+        }
+        .incubadora-info {
+            min-width: 220px;
+            text-align: left;
+        }
+        .incubadora-info p {
+            margin-top: 0;
+            font-size: 1.15rem;
+            color: #444;
+            font-weight: 400;
+        }
+        .btn-submeter-projeto {
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50px;
+            padding: 12px 32px;
+            font-size: 1.08rem;
+            font-weight: 500;
+            border: none;
+            margin-top: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-submeter-projeto:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+        .destaque-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 32px 0 18px 0;
+            color: var(--primary-color);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .destaque-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .destaque-card {
+            width: 180px;
+            min-height: 180px;
+            background: #fff;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 24px 10px 18px 10px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .destaque-card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .destaque-img {
+            width: 64px;
+            height: 64px;
+            background: #eaf2fa;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b0c4d8;
+            font-size: 2rem;
+        }
+        .destaque-label {
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        .destaque-btn {
+            margin-top: 8px;
+            width: 100%;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            padding: 8px 0;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .destaque-btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+        .noticias-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 32px 0 18px 0;
+            text-align: center;
+        }
+        .noticias-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+        .noticia-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 18px 22px 14px 22px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .noticia-card-titulo {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 1.08rem;
+        }
+        .noticia-card-resumo {
+            color: #444;
+            font-size: 0.99rem;
+        }
+        @media (max-width: 700px) {
+            .incubadora-section { flex-direction: column; gap: 24px; }
+            .destaque-cards { flex-direction: column; gap: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <h3 class="text-primary m-0">ISPT</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projetos.html">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mentoria.html">Mentoria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submissao.html">Submissão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="noticias.html">Notícias</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-title">ISPT Incubadora de Inovação</div>
+        <div class="incubadora-section">
+            <div class="incubadora-img">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="incubadora-info">
+                <p>Bem-vindo à incubadora! Aqui ideias se transformam em negócios reais com apoio, mentoria e estrutura moderna.</p>
+                <a href="submissao.html" class="btn btn-submeter-projeto"><i class="fas fa-plus"></i> Submeter Projeto</a>
+            </div>
+        </div>
+
+        <div class="destaque-title">Destaques</div>
+        <div class="destaque-cards">
+            <div class="destaque-card">
+                <div class="destaque-img"><i class="fas fa-folder-open"></i></div>
+                <div class="destaque-label">Projetos</div>
+                <a href="projetos.html" class="destaque-btn"><i class="fas fa-arrow-right"></i> Ver</a>
+            </div>
+            <div class="destaque-card">
+                <div class="destaque-img"><i class="fas fa-calendar-check"></i></div>
+                <div class="destaque-label">Mentoria</div>
+                <a href="mentoria.html" class="destaque-btn"><i class="fas fa-arrow-right"></i> Agendar</a>
+            </div>
+            <div class="destaque-card">
+                <div class="destaque-img"><i class="fas fa-upload"></i></div>
+                <div class="destaque-label">Submissão</div>
+                <a href="submissao.html" class="destaque-btn"><i class="fas fa-arrow-right"></i> Submeter</a>
+            </div>
+        </div>
+
+        <div class="noticias-title">Notícias e Editais</div>
+        <div class="noticias-lista">
+            <div class="noticia-card">
+                <div class="noticia-card-titulo">Edital de Novos Projetos</div>
+                <div class="noticia-card-resumo">Inscrições abertas para seleção de ideias inovadoras. Participe e transforme seu projeto em realidade!</div>
+            </div>
+            <div class="noticia-card">
+                <div class="noticia-card-titulo">Semana da Inovação</div>
+                <div class="noticia-card-resumo">Palestras, workshops e networking para impulsionar o ecossistema empreendedor do ISPT.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html> 
