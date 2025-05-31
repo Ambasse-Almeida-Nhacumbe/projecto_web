@@ -1,0 +1,12 @@
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\config\SecurityConfig.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\config\WebConfig.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\controller\AuthController.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\controller\ProjetoController.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\model\Projeto.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\model\Usuario.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\repository\ProjetoRepository.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\repository\UsuarioRepository.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\service\CustomUserDetailsService.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\service\ProjetoService.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\service\UsuarioService.java
+D:\Faculdade\PROWEB\Incubadora_Turma_B\backend\src\main\java\com\incubadora\SGEI\SgeiApplication.java

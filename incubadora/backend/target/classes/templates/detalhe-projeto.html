@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Projeto - Incubadora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Incubadora</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projetos">Projetos</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('MENTOR')">
+                        <a class="nav-link" href="/mentoria">Mentoria</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="/admin">Administração</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <span class="nav-item nav-link text-light" th:text="${usuario.nome}">Nome do Usuário</span>
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-link nav-link">Sair</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${projeto.nome}">Nome do Projeto</h2>
+                        
+                        <div class="mb-4">
+                            <span class="badge" th:classappend="${
+                                projeto.status == T(com.incubadora.SGEI.model.Projeto.Status).PENDENTE ? 'bg-warning' :
+                                projeto.status == T(com.incubadora.SGEI.model.Projeto.Status).EM_ANALISE ? 'bg-info' :
+                                projeto.status == T(com.incubadora.SGEI.model.Projeto.Status).APROVADO ? 'bg-success' :
+                                'bg-danger'
+                            }" th:text="${projeto.status}">Status</span>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5>Descrição</h5>
+                            <p class="card-text" th:text="${projeto.descricao}">Descrição do Projeto</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5>Informações</h5>
+                            <p><strong>Criado por:</strong> <span th:text="${projeto.usuario.nome}">Nome do Usuário</span></p>
+                            <p><strong>Data de Criação:</strong> <span th:text="${#temporals.format(projeto.dataCriacao, 'dd/MM/yyyy HH:mm')}">01/01/2024</span></p>
+                            <p><strong>Última Atualização:</strong> <span th:text="${#temporals.format(projeto.dataAtualizacao, 'dd/MM/yyyy HH:mm')}">01/01/2024</span></p>
+                        </div>
+
+                        <!-- Seção de Arquivos -->
+                        <div class="mb-4">
+                            <h5>Arquivos do Projeto</h5>
+                            
+                            <!-- Relatório -->
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Relatório do Projeto</h6>
+                                    <div th:if="${projeto.relatorioPath != null}" class="mb-3">
+                                        <p class="mb-2">
+                                            <small class="text-muted">
+                                                Última atualização: 
+                                                <span th:text="${#temporals.format(projeto.ultimaAtualizacaoRelatorio, 'dd/MM/yyyy HH:mm')}">
+                                                    01/01/2024
+                                                </span>
+                                            </small>
+                                        </p>
+                                        <a th:href="@{/api/projetos/{id}/download/relatorio(id=${projeto.id})}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-download"></i> Baixar Relatório
+                                        </a>
+                                    </div>
+                                    <div th:if="${projeto.usuario.id == #authentication.principal.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                                        <form th:action="@{/api/projetos/{id}/relatorio(id=${projeto.id})}" 
+                                              method="post" 
+                                              enctype="multipart/form-data"
+                                              class="upload-form"
+                                              data-tipo="relatorio">
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="file" accept=".pdf,.doc,.docx" required>
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fas fa-upload"></i> Enviar
+                                                </button>
+                                            </div>
+                                            <small class="text-muted d-block mt-1">Formatos aceitos: PDF, DOC, DOCX (Máximo 10MB)</small>
+                                            <div class="progress mt-2 d-none">
+                                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                            </div>
+                                            <div class="alert alert-danger mt-2 d-none" role="alert"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pitch -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>Apresentação (Pitch)</h6>
+                                    <div th:if="${projeto.pitchPath != null}" class="mb-3">
+                                        <p class="mb-2">
+                                            <small class="text-muted">
+                                                Última atualização: 
+                                                <span th:text="${#temporals.format(projeto.ultimaAtualizacaoPitch, 'dd/MM/yyyy HH:mm')}">
+                                                    01/01/2024
+                                                </span>
+                                            </small>
+                                        </p>
+                                        <a th:href="@{/api/projetos/{id}/download/pitch(id=${projeto.id})}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-download"></i> Baixar Pitch
+                                        </a>
+                                    </div>
+                                    <div th:if="${projeto.usuario.id == #authentication.principal.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                                        <form th:action="@{/api/projetos/{id}/pitch(id=${projeto.id})}" 
+                                              method="post" 
+                                              enctype="multipart/form-data"
+                                              class="upload-form"
+                                              data-tipo="pitch">
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="file" accept=".pdf,.ppt,.pptx" required>
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fas fa-upload"></i> Enviar
+                                                </button>
+                                            </div>
+                                            <small class="text-muted d-block mt-1">Formatos aceitos: PDF, PPT, PPTX (Máximo 10MB)</small>
+                                            <div class="progress mt-2 d-none">
+                                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                            </div>
+                                            <div class="alert alert-danger mt-2 d-none" role="alert"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scripts para upload de arquivos -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const forms = document.querySelectorAll('.upload-form');
+                                forms.forEach(form => {
+                                    const fileInput = form.querySelector('input[type="file"]');
+                                    const submitButton = form.querySelector('button[type="submit"]');
+                                    const progressBar = form.querySelector('.progress');
+                                    const progressBarInner = progressBar.querySelector('.progress-bar');
+                                    const errorAlert = form.querySelector('.alert-danger');
+
+                                    // Validação do arquivo
+                                    fileInput.addEventListener('change', function() {
+                                        const file = this.files[0];
+                                        if (file) {
+                                            if (file.size > 10 * 1024 * 1024) { // 10MB
+                                                errorAlert.textContent = 'O arquivo é muito grande. O tamanho máximo permitido é 10MB.';
+                                                errorAlert.classList.remove('d-none');
+                                                this.value = '';
+                                                return;
+                                            }
+                                            errorAlert.classList.add('d-none');
+                                        }
+                                    });
+
+                                    form.addEventListener('submit', function(e) {
+                                        e.preventDefault();
+                                        const formData = new FormData(this);
+                                        const tipo = this.dataset.tipo;
+                                        
+                                        // Reset UI
+                                        errorAlert.classList.add('d-none');
+                                        progressBar.classList.remove('d-none');
+                                        progressBarInner.style.width = '0%';
+                                        submitButton.disabled = true;
+
+                                        // Upload com progresso
+                                        const xhr = new XMLHttpRequest();
+                                        xhr.open('POST', this.action, true);
+                                        xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="_csrf"]').content);
+
+                                        xhr.upload.onprogress = function(e) {
+                                            if (e.lengthComputable) {
+                                                const percentComplete = (e.loaded / e.total) * 100;
+                                                progressBarInner.style.width = percentComplete + '%';
+                                                progressBarInner.setAttribute('aria-valuenow', percentComplete);
+                                            }
+                                        };
+
+                                        xhr.onload = function() {
+                                            if (xhr.status === 200) {
+                                                location.reload();
+                                            } else {
+                                                try {
+                                                    const response = JSON.parse(xhr.responseText);
+                                                    errorAlert.textContent = response.message || 'Erro ao enviar arquivo';
+                                                } catch (e) {
+                                                    errorAlert.textContent = 'Erro ao enviar arquivo';
+                                                }
+                                                errorAlert.classList.remove('d-none');
+                                                progressBar.classList.add('d-none');
+                                            }
+                                            submitButton.disabled = false;
+                                        };
+
+                                        xhr.onerror = function() {
+                                            errorAlert.textContent = 'Erro de conexão ao enviar arquivo';
+                                            errorAlert.classList.remove('d-none');
+                                            progressBar.classList.add('d-none');
+                                            submitButton.disabled = false;
+                                        };
+
+                                        xhr.send(formData);
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <!-- Ações (apenas para Admin e Mentor) -->
+                        <div class="mb-4" sec:authorize="hasAnyRole('ADMIN', 'MENTOR')">
+                            <h5>Ações</h5>
+                            <form id="statusForm" class="mb-3">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="status" class="col-form-label">Alterar Status:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-select" id="status" name="status">
+                                            <option th:each="status : ${statusDisponiveis}"
+                                                    th:value="${status}"
+                                                    th:text="${status}"
+                                                    th:selected="${status == projeto.status}">
+                                                Status
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-primary" onclick="atualizarStatus()">
+                                            Atualizar Status
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Botão de Agendar Mentoria (apenas para Mentor) -->
+                            <div sec:authorize="hasRole('MENTOR')" class="mb-3">
+                                <a th:href="@{/mentoria/agendar/{id}(id=${projeto.id})}" class="btn btn-success">
+                                    <i class="fas fa-calendar-plus"></i> Agendar Mentoria
+                                </a>
+                            </div>
+
+                            <!-- Botão de Excluir (apenas para Admin) -->
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <button class="btn btn-danger" onclick="deletarProjeto()">
+                                    <i class="fas fa-trash"></i> Excluir Projeto
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="/projetos" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar para Projetos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function atualizarStatus() {
+            const status = document.getElementById('status').value;
+            fetch(`/api/projetos/${projeto.id}/status?status=${status}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').content
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Erro ao atualizar status');
+                }
+            });
+        }
+
+        function deletarProjeto() {
+            if (confirm('Tem certeza que deseja excluir este projeto?')) {
+                fetch(`/api/projetos/${projeto.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').content
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/projetos';
+                    } else {
+                        alert('Erro ao excluir projeto');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html> 
